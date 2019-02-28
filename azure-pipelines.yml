@@ -1,0 +1,35 @@
+queue:
+  name: Hosted VS2017
+  demands: maven
+
+steps:
+- task: gittools.gitversion.gitversion-task.GitVersion@3
+  displayName: GitVersion
+  inputs:
+    preferBundledVersion: true
+
+- task: PowerShell@2
+  displayName: 'Set custom BuildNumber'
+  inputs:
+    targetType: 'filePath'
+    filePath: setBuildNumber.ps1
+    arguments: $(GitVersion.SemVer)
+    errorActionPreference: continue
+
+- task: Maven@2
+  displayName: 'Maven pom.xml package'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean package'
+
+# Build only "master" branch
+- task: GithubRelease@0 
+  displayName: 'Create GitHub Release'
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+  inputs:
+    githubConnection: wbicode-bot
+    repositoryName: wbicode/TikaService
+    tagSource: auto
+    assets: $(Build.SourcesDirectory)/target/*-bin.zip
+
+

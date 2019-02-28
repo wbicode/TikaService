@@ -1,0 +1,26 @@
+assembly-versioning-scheme: MajorMinorPatch
+branches:
+  bugfix:
+    mode: ContinuousDeployment
+    tag: bugfix-{BranchName}
+    increment: Patch
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+  develop:
+    tag: dev
+    increment: Patch
+  feature[/-]:
+    mode: ContinuousDeployment
+    tag: feature-{BranchName}
+    increment: Inherit
+  hotfix:
+    mode: ContinuousDeployment
+    tag: hotfix
+    increment: Patch
+  release[/-]:
+    mode: ContinuousDeployment
+    tag: rc
+    increment: Minor
+  master:
+    tag:
+    increment: Patch
