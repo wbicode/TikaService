@@ -22,14 +22,9 @@ steps:
     mavenPomFile: 'pom.xml'
     goals: 'clean package'
 
-# Build only "master" branch
-- task: GithubRelease@0 
-  displayName: 'Create GitHub Release'
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+- task: PublishBuildArtifacts@1
   inputs:
-    githubConnection: wbicode-bot
-    repositoryName: wbicode/TikaService
-    tagSource: auto
-    assets: $(Build.SourcesDirectory)/target/*-bin.zip
+    pathtoPublish: '$(Build.SourcesDirectory)/target/*-bin.zip'
+    artifactName: 'TikaService'
 
 
