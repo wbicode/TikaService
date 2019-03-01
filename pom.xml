@@ -16,8 +16,8 @@
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<finalName>${project.artifactId}-${env.GITVERSION_SEMVER}</finalName>
 		
+		<finalName>TikaService</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
