@@ -12,12 +12,14 @@
 		
 		<!-- Tika server version -->
 		<tika.server.version>1.20</tika.server.version>
+		
+		<buildversion>dev</buildversion>
 	</properties>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<finalName>${project.artifactId}-${env.GITVERSION_SEMVER}</finalName>
 		
+		<finalName>TikaService</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -49,6 +51,8 @@
 					<descriptors>
 						<descriptor>src/assembly/TikaService.xml</descriptor>
 					</descriptors>
+					<finalName>TikaService-${buildversion}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
 					<execution>
