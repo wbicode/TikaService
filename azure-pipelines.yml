@@ -24,7 +24,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(Build.SourcesDirectory)/target/*-bin.zip'
+    pathtoPublish: '$(Build.SourcesDirectory)/target/'
     artifactName: 'TikaService'
 
 
