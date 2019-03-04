@@ -20,7 +20,7 @@ steps:
   displayName: 'Maven pom.xml package'
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean package'
+    goals: 'clean package -Dbuildversion=$(GitVersion.SemVer)'
 
 - task: PublishBuildArtifacts@1
   inputs:

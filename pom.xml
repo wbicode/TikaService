@@ -12,6 +12,8 @@
 		
 		<!-- Tika server version -->
 		<tika.server.version>1.20</tika.server.version>
+		
+		<buildversion>dev</buildversion>
 	</properties>
 
 	<build>
@@ -49,6 +51,8 @@
 					<descriptors>
 						<descriptor>src/assembly/TikaService.xml</descriptor>
 					</descriptors>
+					<finalName>TikaService-${buildversion}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
 					<execution>
