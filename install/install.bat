@@ -48,7 +48,7 @@ if "%TIKA_LOGLEVEL%"=="" (
 )
 
 if "%PRUNSRV_NAME%"=="" (
-	ECHO.%JAVA_HOME%| FIND /I "x86">Nul && ( 
+	ECHO."%JAVA_HOME%"| FIND /I "x86">Nul && ( 
 	  set PRUNSRV_NAME=prunsrv.exe
 	) || (
 	  set PRUNSRV_NAME=prunsrv64.exe
@@ -81,7 +81,7 @@ if exist "%JAVA_HOME%\bin\server\jvm.dll" (
 
 REM it's also possible to add StartParams and StopParams
 :found
-"%SERVICE_PATH%\install\%PRUNSRV_NAME%" //IS//%SERVICE_NAME% ^
+"%SERVICE_PATH%\install\%PRUNSRV_NAME%" //IS//"%SERVICE_NAME%" ^
 --DisplayName "%SERVICE_NAME%" ^
 --Classpath "%SERVICE_PATH%\TikaService.jar;%SERVICE_PATH%\lib\*" ^
 --Jvm "%JAVA_HOME%%JVM_DLL%" ^
