@@ -6,6 +6,10 @@ It's possible to edit the JVM-Options at install-time (see `config/jvm.opts`) an
 # Installation
 
 * Make sure you have Java installed ([OpenJDK](https://github.com/ojdkbuild/ojdkbuild))
+    * Make sure JAVA_HOME is set (contains \bin\java.exe and one of the following:
+        * \jre\bin\server\jvm.dll
+        * \bin\client\jvm.dll
+        * \bin\client\jvm.dll)
 * Move all files (inside the released zip file) to the install-directory
 * Run `install\install.bat SERVICE-NAME` as administrator.
     * install.bat is configureable by the following environment variables: `TIKA_STARTUP_TYPE` ("auto" or "manual"), `TIKA_LOG_PATH`, `TIKA_LOGLEVEL` (Error, Info, Warn, Debug) and `PRUNSRV_NAME` which can be prunsrv.exe or prunsrv64.exe (for a 64bit operating system)
@@ -36,3 +40,7 @@ Documentation: [GitVersion](https://gitversion.readthedocs.io/en/v3.6.5/configur
 You need to have Java installed and maven. <br />
 
 Simply run `mvn package` and the deployable .zip file will get created inside the target/ folder
+
+# Switching from Oracle Java to OpenJDK
+
+You'll have to reinstall this service (because the jvm.dll path changes and this gets stored inside the registry)
