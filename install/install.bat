@@ -84,7 +84,7 @@ REM it's also possible to add StartParams and StopParams
 "%SERVICE_PATH%\install\%PRUNSRV_NAME%" //IS//"%SERVICE_NAME%" ^
 --DisplayName "%SERVICE_NAME%" ^
 --Classpath "%SERVICE_PATH%\TikaService.jar;%SERVICE_PATH%\lib\*" ^
---Jvm "%JAVA_HOME%%JVM_DLL%" ^
+--Jvm "%%JAVA_HOME%%%JVM_DLL%" ^
 --JvmOptions %JVM_OPTIONS% ^
 --StartMode jvm ^
 --StartClass "at.wbi.tika.Service" ^
