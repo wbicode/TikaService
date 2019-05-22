@@ -80,6 +80,7 @@ if exist "%JAVA_HOME%\bin\server\jvm.dll" (
 )
 
 REM it's also possible to add StartParams and StopParams
+REM the "-Jvm" param is needed when starting in jvm mode; the "auto" value only works for Oracle Java (and not for openjdk or AdoptOpenJDK)
 :found
 "%SERVICE_PATH%\install\%PRUNSRV_NAME%" //IS//"%SERVICE_NAME%" ^
 --DisplayName "%SERVICE_NAME%" ^
