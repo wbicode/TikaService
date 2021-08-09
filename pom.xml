@@ -89,6 +89,7 @@
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-server</artifactId>
 			<version>${tika.server.version}</version>
+			<type>pom</type>
 		</dependency>
 	</dependencies>
 </project>
