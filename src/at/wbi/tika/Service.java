@@ -12,7 +12,7 @@ public class Service {
 
 	private static boolean DEBUG = false;
 
-	private static final String MAIN_CLASS_NAME = "org.apache.tika.server.TikaServerCli";
+	private static final String MAIN_CLASS_NAME = "org.apache.tika.server.core.TikaServerCli";
 
 	public static void start(String[] args) {
 		System.out.println("starting... TikaService");
