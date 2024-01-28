@@ -7,7 +7,9 @@ cd %~dp0\..\
 set SERVICE_PATH=%CD%
 popd
 
-set CONFIG_PATH=%SERVICE_PATH%\config\
+set CONFIG_PATH=%SERVICE_PATH%\config
+set SERVICE_CONFIG_FILE=%CONFIG_PATH%\service.config
+set TIKA_CONFIG_FILE=%CONFIG_PATH%\tika-config.xml
 set JVM_OPTION_FILE=%CONFIG_PATH%\jvm.opts
 
 @setlocal EnableDelayedExpansion
@@ -26,6 +28,10 @@ for /f "usebackq delims== tokens=1,2" %%G in ("%JVM_OPTION_FILE%") do (
 	) else (
 		set "JVM_OPTIONS=!JVM_OPTIONS!-%%G%%H;"
 	)
+)
+
+for /f "delims== tokens=1,*" %%A in ("%SERVICE_CONFIG_FILE%") do (
+    SET "%%~A=%%~B"
 )
 
 REM ############ CONFIG ###########################
@@ -55,6 +61,11 @@ if "%PRUNSRV_NAME%"=="" (
 	)
 )
 
+
+REM create log path
+mkdir "%TIKA_LOG_PATH%"
+
+
 REM search for jvm.dll
 REM store path in JVM_DLL
 
@@ -79,24 +90,27 @@ if exist "%JAVA_HOME%\bin\server\jvm.dll" (
   	exit 1
 )
 
+
 REM it's also possible to add StartParams and StopParams
 REM the "-Jvm" param is needed when starting in jvm mode; the "auto" value only works for Oracle Java (and not for openjdk or AdoptOpenJDK)
 :found
 "%SERVICE_PATH%\install\%PRUNSRV_NAME%" //IS//"%SERVICE_NAME%" ^
---DisplayName "%SERVICE_NAME%" ^
---Classpath "%SERVICE_PATH%\TikaService.jar;%SERVICE_PATH%\lib\*" ^
---Jvm "%%JAVA_HOME%%%JVM_DLL%" ^
---JvmOptions %JVM_OPTIONS% ^
---StartMode jvm ^
---StartClass "at.wbi.tika.Service" ^
---StartMethod start ^
---StopMode jvm ^
---StopClass "at.wbi.tika.Service" ^
---StopMethod stop ^
---Description "tika-server Windows Service" ^
---LogPath "%TIKA_LOG_PATH%" ^
---StdOutput auto ^
---StdError auto ^
---LogLevel %TIKA_LOGLEVEL% ^
---Startup %TIKA_STARTUP_TYPE% ^
---StartPath "%SERVICE_PATH%"
+--DisplayName="%SERVICE_NAME%" ^
+--Description="tika-server Windows Service" ^
+--Install="%SERVICE_PATH%\install\%PRUNSRV_NAME%" ^
+--Classpath="%SERVICE_PATH%\lib\*" ^
+--Jvm="%%JAVA_HOME%%%JVM_DLL%" ^
+--JvmOptions=%JVM_OPTIONS% ^
+--StartMode=jvm ^
+--StartClass="org.apache.tika.server.core.TikaServerCli" ^
+--StartMethod=main ^
+--StopMode=jvm ^
+--StopClass="org.apache.tika.server.core.TikaServerCli" ^
+--StopMethod=stop ^
+--LogPath="%TIKA_LOG_PATH%" ^
+--StdOutput=auto ^
+--StdError=auto ^
+--LogLevel=%TIKA_LOGLEVEL% ^
+--Startup=%TIKA_STARTUP_TYPE% ^
+--StartPath="%SERVICE_PATH%" ^
+--StartParams=-c#"%TIKA_CONFIG_FILE%"
