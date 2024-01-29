@@ -23,7 +23,6 @@
 			<directory>${project.build.directory}</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
-				<include>*.jar</include>
 				<include>lib/*</include>
 			</includes>
 		</fileSet>

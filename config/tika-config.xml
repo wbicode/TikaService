@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- See: https://cwiki.apache.org/confluence/display/TIKA/TikaServer+in+Tika+2.x -->
+<properties>
+  <server>
+    <params>
+      <port>9997</port>
+      <host>localhost</host>
+      <digest>sha256</digest>
+      <digestMarkLimit>1000000</digestMarkLimit>
+      <logLevel>info</logLevel>
+      <returnStackTrace>false</returnStackTrace>
+      <forkedJvmArgs>
+        <arg>-Xms300M</arg>
+        <arg>-Xmx400M</arg>
+      </forkedJvmArgs>
+    </params>
+  </server>
+</properties>

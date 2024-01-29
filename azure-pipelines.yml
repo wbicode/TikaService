@@ -1,6 +1,7 @@
-queue:
-  name: Hosted VS2017
+pool:
+  name: Azure Pipelines
   demands: maven
+  vmImage: windows-latest
 
 steps:
 - task: gittools.gitversion.gitversion-task.GitVersion@3
